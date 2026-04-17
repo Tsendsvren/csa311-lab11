@@ -1,47 +1,144 @@
-#board {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: #2196F3;
-  padding: 10px
-}
-
-.cell {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  height: 25vmin;
-  text-align: center;
-}
-
-#bottombar {
-  height: 5vh;
-}
-
-#instructions {
-  height: 5vh;
-  background-color: white;
-  padding: 0px;
-  margin: 0px;
-  text-align: center;
-  border: 1px solid black;
-}
-
-#bottombar button {
-  width: 50%;
-  /* height: 100%; */
-  margin: 0;
-  padding: 0;
-  position: relative;
-  float: left;
-  font-size: 2vw
-}
-
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.playable { background-color: red;}
+#app{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+#title{
+  color:#e0e0ff;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(100, 149, 237, 0.8);
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.cell {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  width: 22vmin;
+  height: 22vmin;
+  max-width: 130px;
+  max-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  cursor: default;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cell-x{
+  color: #ff6b6b;
+  text-shadow: 0 0 12px rgba(255, 107, 107, 0.7);
+}
+
+.cell-o{
+  color: #74b9ff;
+  text-shadow: 0 0 12px rgba(116, 185, 255, 0.7);
+}
+
+.playable {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.playable:hover{
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #a29bfe;
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(162, 155, 254, 0.4);
+}
+
+a{
+  text-decoration: none;
+}
+
+#bottombar {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#instructions {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px, 32px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  min-width: 280px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+#bottombar button {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+#bottombar button:first-child {
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  color: white;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+
+#bottombar button:first-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
+}
+
+#bottombar button:last-child {
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+}
+
+#bottombar button:last-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.6);
+}
+
+#bottombar button:active {
+  transform: translateY(0);
+}

@@ -40,6 +40,10 @@ public class Game {
         return this.player;
     }
 
+    public List<Game> getHistory() {
+        return this.history;
+    }
+
     public Game play(int x, int y) {
         if (this.board.getCell(x, y) != null)
             return this;
@@ -49,6 +53,12 @@ public class Game {
         newHistory.add(this);
         Player nextPlayer = this.player == Player.PLAYER0 ? Player.PLAYER1 : Player.PLAYER0;
         return new Game(this.board.updateCell(x, y, this.player), nextPlayer, newHistory);
+    }
+
+    public Game undo(){
+        if (this.history.isEmpty())
+            return this;
+        return this.history.get(this.history.size() - 1);
     }
 
     public Player getWinner() {

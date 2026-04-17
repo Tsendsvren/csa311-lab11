@@ -5,18 +5,25 @@ import java.util.Arrays;
 public class GameState {
 
     private final Cell[] cells;
+    private final String instructions;
 
-    private GameState(Cell[] cells) {
+    private GameState(Cell[] cells, String instructions) {
         this.cells = cells;
+        this.instructions = instructions;
     }
 
     public static GameState forGame(Game game) {
         Cell[] cells = getCells(game);
-        return new GameState(cells);
+        String instructions = getInstructions(game);
+        return new GameState(cells, instructions);
     }
 
     public Cell[] getCells() {
         return this.cells;
+    }
+
+    public String getInstructions() {
+        return this.instructions;
     }
 
     /**
@@ -26,13 +33,24 @@ public class GameState {
     @Override
     public String toString() {
         return """
-                { "cells": %s}
-                """.formatted(Arrays.toString(this.cells));
+                { "cells": %s, "instructions": "%s" }
+                """.formatted(Arrays.toString(this.cells), this.instructions);
+    }
+
+    private static String getInstructions(Game game) {
+        Player winner = game.getWinner();
+        if(winner != null){
+            String winnerName = winner == Player.PLAYER0 ? "X (Тоглогч 1)" : "O (Тоглогч 2)";
+            return winnerName + " яллаа!";
+        }
+        String currentPlayer = game.getPlayer() == Player.PLAYER0 ? "X (Тоглогч 1)" : "O (Тоглогч 2)";
+        return "Одоо " + currentPlayer + "-ийн ээлж.";
     }
 
     private static Cell[] getCells(Game game) {
         Cell cells[] = new Cell[9];
         Board board = game.getBoard();
+        Player winner = game.getWinner();
         for (int x = 0; x <= 2; x++) {
             for (int y = 0; y <= 2; y++) {
                 String text = "";
@@ -42,7 +60,7 @@ public class GameState {
                     text = "X";
                 else if (player == Player.PLAYER1)
                     text = "O";
-                else if (player == null) {
+                else if (player == null && winner == null) {
                     playable = true;
                 }
                 cells[3 * y + x] = new Cell(x, y, text, playable);
