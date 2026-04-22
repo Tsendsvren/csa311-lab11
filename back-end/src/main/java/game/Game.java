@@ -55,10 +55,27 @@ public class Game {
         return new Game(this.board.updateCell(x, y, this.player), nextPlayer, newHistory);
     }
 
-    public Game undo(){
+    public Game undo() {
         if (this.history.isEmpty())
             return this;
+            
+        if (this.getWinner() != null || this.isDraw())
+            return this;
+
         return this.history.get(this.history.size() - 1);
+    }
+
+    public boolean isDraw() {
+        if (getWinner() != null) return false;
+
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (board.getCell(x, y) == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public Player getWinner() {

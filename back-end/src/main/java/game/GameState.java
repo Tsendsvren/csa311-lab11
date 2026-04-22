@@ -39,10 +39,16 @@ public class GameState {
 
     private static String getInstructions(Game game) {
         Player winner = game.getWinner();
-        if(winner != null){
+
+        if (winner != null) {
             String winnerName = winner == Player.PLAYER0 ? "X (Тоглогч 1)" : "O (Тоглогч 2)";
             return winnerName + " яллаа!";
         }
+
+        if (game.isDraw()) {
+            return "Тэнцлээ!";
+        }
+
         String currentPlayer = game.getPlayer() == Player.PLAYER0 ? "X (Тоглогч 1)" : "O (Тоглогч 2)";
         return "Одоо " + currentPlayer + "-ийн ээлж.";
     }
